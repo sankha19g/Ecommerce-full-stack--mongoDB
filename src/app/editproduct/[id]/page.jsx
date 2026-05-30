@@ -1,8 +1,10 @@
 import EditProductForm from "@/app/components/editproductform";
 
 const getProductById = async (id) => {
+
+    const apiUrl = process.env.API_URL;
     try {
-        const res = await fetch(`http://localhost:3000/api/products/${id}`, { cache: "no-store", });
+        const res = await fetch(`${apiUrl}/api/products/${id}`, { cache: "no-store", });
         if (!res.ok) {
             throw new Error("Failed to fetch product");
         }

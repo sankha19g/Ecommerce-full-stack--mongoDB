@@ -4,8 +4,9 @@ import Link from "next/link";
 
 
 const getProducts = async () => {
+    const apiUrl = process.env.API_URL;
     try {
-        const res = await fetch("http://localhost:3000/api/products", {
+        const res = await fetch(`${apiUrl}/api/products`, {
             next: { revalidate: 60 },
         });
         if (!res.ok) {
@@ -27,7 +28,8 @@ export default async function Recomendedcards() {
             {products.map((props) => (
 
                 <div key={props._id} className="w-full h-fit rounded-xs border-2 border-slate-200 flex flex-col justify-between cursor-pointer  hover:bg-slate-100">
-                    <Link href={`/productsdetails/${props._id}`}><div className="m-2 h-48 sm:h-52 md:h-60 w-auto rounded-md border-slate-200"><img className="object-cover w-full h-full" src={props.image} alt={props.title} /></div>
+                    <Link href={`/productsdetails/${props._id}`}><div className="m-2 h-48 sm:h-52 md:h-60 w-auto rounded-md border-slate-200">
+                        <img className="object-cover w-full h-full" src={props.image} alt={props.title} loading="lazy"/></div>
                     </Link>
                     <div className="m-2 w-auto h-fit rounded-md p-1">
                         <p className="italic text-sm  text-yellow-700 hover:text-yellow-900 hover:underline">{props.company || <span className="text-gray-400 italic font-light">

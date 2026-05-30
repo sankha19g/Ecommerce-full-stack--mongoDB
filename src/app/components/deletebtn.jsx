@@ -8,7 +8,7 @@ export default function Deletebtn({ id }) {
     const removeProduct = async () => {
         const confirmed = confirm("Are you sure you want to delete this product?");
         if (confirmed) {
-            const res = await fetch(`http://localhost:3000/api/products?id=${id}`, {
+            const res = await fetch(`/api/products?id=${id}`, {
                 method: "DELETE",
             });
             if (res.ok) {

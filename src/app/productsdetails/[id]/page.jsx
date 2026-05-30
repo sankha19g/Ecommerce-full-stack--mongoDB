@@ -16,8 +16,9 @@ const getRandomFutureDate = () => {
 };
 
 const getProduct = async (id) => {
+   const apiUrl = process.env.API_URL;
     try {
-        const res = await fetch(`http://localhost:3000/api/productdetails/${id}`, {
+        const res = await fetch(`${apiUrl}/api/products/${id}`, {
             next: { revalidate: 60 },
         });
         if (!res.ok) {

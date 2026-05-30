@@ -4,8 +4,9 @@ import Deletebtn from "../components/deletebtn";
 
 
 const getProducts = async () => {
+   const apiUrl = process.env.API_URL;
     try {
-        const res = await fetch("http://localhost:3000/api/products", {
+        const res = await fetch(`${apiUrl}/api/products`, {
             next: { revalidate: 60 },
         });
         if (!res.ok) {
@@ -36,7 +37,7 @@ export default async function SellerPage() {
 
                     <div className="w-full mr-4 mx-2  h-fit flex flex-row gap-2 border border-slate-200 p-2">
                         <div className="border border-slate-400 w-50 h-auto">
-                            <img src={props.image} alt="Product" className="w-full h-full lg:h-50 object-cover" />
+                            <img src={props.image} alt="Product" className="w-full h-full lg:h-50 object-cover" loading="lazy"/>
                         </div>
                         <div className="border border-slate-400 w-100 lg:w-full h-fit pl-4 ">
                             <p className="font-bold  text-sm lg:text-xl w-auto border border-slate-200 hover:bg-slate-100">Title: <span className="font-normal">{props.title || <span className="text-red-600 italic font-light">Not Available</span>}</span></p>
