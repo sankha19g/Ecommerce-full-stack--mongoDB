@@ -31,7 +31,7 @@ export default function Reviews({ rating }) {
                     <p className="ml-2">{rating} out of 5 </p>
                 </div>
 
-                <p>{Math.floor(Math.random() * 1001) + 1000} global ratings</p>
+                <p>1600 global ratings</p>
                 <RatingDistribution />
 
             </div>
