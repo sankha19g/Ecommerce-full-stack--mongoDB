@@ -3,6 +3,8 @@ import PurchaseBox from "../../components/PurchaseBox";
 import ProductDescription from "../../components/productdescription";
 import { Star } from "lucide-react";
 import Recomendedcards from "../../components/recomendedcards";
+import connectMongoDB from "../../../../lib/mongodb";
+import Product from "../../../../models/product";
 
 const getRandomFutureDate = () => {
     const today = new Date();
@@ -16,19 +18,9 @@ const getRandomFutureDate = () => {
 };
 
 const getProduct = async (id) => {
-   const apiUrl = process.env.API_URL;
-    try {
-        const res = await fetch(`${apiUrl}/api/products/${id}`, {
-            next: { revalidate: 60 },
-        });
-        if (!res.ok) {
-            throw new Error("Failed to fetch product details");
-        }
-        return res.json();
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+    await connectMongoDB();
+    const product = await Product.findById(id).lean();
+    return { product: JSON.parse(JSON.stringify(product)) };
 };
 
 export default async function ProductDetailPage({ params }) {

@@ -1,18 +1,11 @@
 import EditProductForm from "@/app/components/editproductform";
+import connectMongoDB from "../../../../lib/mongodb";
+import Product from "../../../../models/product";
 
 const getProductById = async (id) => {
-
-    const apiUrl = process.env.API_URL;
-    try {
-        const res = await fetch(`${apiUrl}/api/products/${id}`, { cache: "no-store", });
-        if (!res.ok) {
-            throw new Error("Failed to fetch product");
-        }
-
-        return res.json();
-    } catch (err) {
-        console.log(err);
-    }
+    await connectMongoDB();
+    const product = await Product.findById(id).lean();
+    return { product: JSON.parse(JSON.stringify(product)) };
 }
 
 

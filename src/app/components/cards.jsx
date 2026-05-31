@@ -1,23 +1,12 @@
 import { Star } from "lucide-react";
 import Link from "next/link";
-
-
+import connectMongoDB from "../../../../lib/mongodb";
+import Product from "../../../../models/product";
 
 const getProducts = async () => {
-     const apiUrl = process.env.API_URL;
-    try {
-        const res = await fetch(`${apiUrl}/api/products`, {
-            next: { revalidate: 60 },
-        });
-        if (!res.ok) {
-            throw new Error("Failed to fetch Products");
-        }
-        return res.json();
-    }
-    catch (error) {
-        console.log(error);
-        throw error;
-    }
+    await connectMongoDB();
+    const products = await Product.find().sort({ createdAt: -1 }).lean();
+    return { products: JSON.parse(JSON.stringify(products)) };
 }
 
 
