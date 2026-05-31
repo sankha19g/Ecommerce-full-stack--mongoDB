@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 
 const navLinks = [
     { href: "/", label: "Home" },
@@ -21,7 +21,9 @@ const Navbar = () => {
             <div className="flex items-center justify-between px-5 sm:px-10 h-20">
 
                 {/* Logo */}
-                <div className="text-2xl font-bold tracking-wide">SHOPPING ZONE</div>
+                <div className="bg-amber-400/90  rounded-full px-2 text-2xl font-bold tracking-wide flex items-center gap-2 cursor-pointer hover:bg-amber-600">
+                    <ShoppingBag size={24} color="#00008b" />
+                    <p className="p-2 ">SHOPPING ZONE</p></div>
 
                 {/* Desktop nav links */}
                 <ul className="hidden md:flex flex-row gap-4 cursor-pointer">
