@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import Link from "next/link";
-import connectMongoDB from "../../../../lib/mongodb";
-import Product from "../../../../models/product";
+import connectMongoDB from "../../../lib/mongodb";
+import Product from "../../../models/product";
 
 const getProducts = async () => {
     await connectMongoDB();
